@@ -1,4 +1,4 @@
-# pico-8-wrapper-miyoo
+# An SDL2 Wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 A wrapper to run Pico-8 Native on the Miyoo Mini/Miyoo Mini plus.
 
 ### v0.8
