@@ -7,6 +7,7 @@ A wrapper to run Pico-8 Native on the Miyoo Mini/Miyoo Mini plus.
 - "border" -> "bezel" - folder name replaced, all references replaced to make it a more relatable name.
 - Added "integer_scaled" bezel directory, added "standard" bezel directory.
 - Removed "def_" version of bezels logic.
+- Redraw mouse icon if overlay is changed while in mouse mode
 
 ### v0.7.2
 - Fix repeating input when swapping to mouse.
