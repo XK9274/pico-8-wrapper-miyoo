@@ -10,6 +10,7 @@ A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 3. [To-do](#to-do)
 4. [Changelog](#changelog)
 5. [Screenshots](#screenshots)
+6. [Releases](https://github.com/XK9274/pico-8-wrapper-miyoo/releases)
 
 <a name="installation"></a>
 ## Installation
