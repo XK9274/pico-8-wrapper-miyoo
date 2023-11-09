@@ -19,9 +19,10 @@ A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 2. [Features](#features)
 3. [Button Shortcuts](#button-shortcuts)
 4. [To-do](#to-do)
-5. [Changelog](#changelog)
+5. [Bezel Templates](#bezel-templates)
 6. [Screenshots](#screenshots)
-7. [Releases](https://github.com/XK9274/pico-8-wrapper-miyoo/releases)
+7. [Changelog](#changelog)
+8. [Releases](https://github.com/XK9274/pico-8-wrapper-miyoo/releases)
 
 <a name="installation"></a>
 ## Installation
@@ -52,6 +53,11 @@ A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 ## To-do
 - Figure out console input for hotkeys (Save, re-enter splore).
 - Performance pass...
+
+<a name="bezel-templates"></a>
+## Bezel-templates
+![int_def_bezel](https://github.com/XK9274/pico-8-wrapper-miyoo/assets/47260768/fd6c1c7b-50bd-410d-8a8e-9cd2a92c9d4c)
+![def_border](https://github.com/XK9274/pico-8-wrapper-miyoo/assets/47260768/69bd3a41-26de-4790-b531-1ae74da873f6)
 
 <a name="changelog"></a>
 ## Changelog
