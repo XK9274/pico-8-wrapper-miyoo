@@ -7,10 +7,11 @@ A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 ## Table of Contents
 1. [Installation](#installation)
 2. [Features](#features)
-3. [To-do](#to-do)
-4. [Changelog](#changelog)
-5. [Screenshots](#screenshots)
-6. [Releases](https://github.com/XK9274/pico-8-wrapper-miyoo/releases)
+3. [Button Shortcuts](#button-shortcuts)
+4. [To-do](#to-do)
+5. [Changelog](#changelog)
+6. [Screenshots](#screenshots)
+7. [Releases](https://github.com/XK9274/pico-8-wrapper-miyoo/releases)
 
 <a name="installation"></a>
 ## Installation
@@ -26,6 +27,16 @@ A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 - Splore functionality.
 - Multicart support (With full source only).
 - Good performance.
+
+<a name="Button Shortcuts"></a>
+## To-do
+- Select + Up/Down - Overclock modifier
+- Select + Left/Right - Bezel selection
+- L2 - Mouse mode
+    - R2 in mouse mode - Mouse acceleration
+- Select + R1 - Display scaling modifier
+- Select + Menu - Quit
+- Select + L1 - Reload cart
 
 <a name="to-do"></a>
 ## To-do
