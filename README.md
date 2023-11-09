@@ -1,5 +1,38 @@
-# An SDL2 Wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
-A wrapper to run Pico-8 Native on the Miyoo Mini/Miyoo Mini plus.
+---
+
+# Pico-8 Wrapper for Miyoo Mini/Miyoo Mini Plus
+
+A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
+
+## Table of Contents
+1. [Installation](#installation)
+2. [Features](#features)
+3. [To-do](#to-do)
+4. [Changelog](#changelog)
+5. [Screenshots](#screenshots)
+
+<a name="installation"></a>
+## Installation
+- Drag the app folder from the releases page into `/mnt/SDCARD/App/` (so it becomes `/mnt/SDCARD/App/pico`).
+- Drag your RASPBERRY PI `pico8_dyn` and `pico8.dat` into `/mnt/SDCARD/App/pico/bin`. You can purchase Pico-8 [here](https://www.lexaloffle.com/pico-8.php).
+
+<a name="features"></a>
+## Features
+- Realtime overclocking -> Select + Up/Down.
+- Bezel selection -> Select + Left/Right.
+- Mouse mode -> L2.
+    - Mouse acceleration -> hold R2 (while in mouse mode).
+- Splore functionality.
+- Multicart support (With full source only).
+- Good performance.
+
+<a name="to-do"></a>
+## To-do
+- Figure out console input for hotkeys (Save, re-enter splore).
+- Performance pass...
+
+<a name="changelog"></a>
+## Changelog
 
 ### v0.8
 - Display mode shortcut added -> SELECT + R1 will toggle between scaled, fullscreen, native output (384x384 from pico-8) (which also has its own bezel selection).
@@ -8,6 +41,7 @@ A wrapper to run Pico-8 Native on the Miyoo Mini/Miyoo Mini plus.
 - Added "integer_scaled" bezel directory, added "standard" bezel directory.
 - Removed "def_" version of bezels logic.
 - Redraw mouse icon if overlay is changed while in mouse mode
+- Only draw alpha when required (for bezels, mouse icon)
 
 ### v0.7.2
 - Fix repeating input when swapping to mouse.
@@ -69,4 +103,21 @@ A wrapper to run Pico-8 Native on the Miyoo Mini/Miyoo Mini plus.
 
 ### v0.2
 - Audio.
+
+
+<a name="screenshots"></a>
+## Screenshots
+### Full screen
+![Full screen](https://github.com/XK9274/pico-8-wrapper-miyoo/assets/47260768/32566649-9008-43e8-8cd5-9d2a587fe493)
+
+### Aspect scaled
+![Aspect scaled](https://github.com/XK9274/pico-8-wrapper-miyoo/assets/47260768/c3434d9e-0ed2-4716-8fc8-655c53390bd6)
+
+### Integer scaled
+![Integer scaled](https://github.com/XK9274/pico-8-wrapper-miyoo/assets/47260768/b9679f53-7ff0-4a39-83ca-18aff5abd0b5)
+
+---
+
+This format should provide a clear and organized presentation of your project on GitHub. The Table of Contents provides quick navigation to different sections of your documentation.
+  
 
