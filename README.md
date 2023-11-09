@@ -29,7 +29,7 @@ A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 - Good performance.
 
 <a name="Button Shortcuts"></a>
-## To-do
+## Button Shortcuts
 - Select + Up/Down - Overclock modifier
 - Select + Left/Right - Bezel selection
 - L2 - Mouse mode
