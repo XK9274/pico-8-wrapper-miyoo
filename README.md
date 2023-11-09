@@ -26,7 +26,7 @@ A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 
 <a name="installation"></a>
 ## Installation
-- Drag the app folder from the releases page into `/mnt/SDCARD/App/` (so it becomes `/mnt/SDCARD/App/pico`).
+- Drag the app folder from the releases page into `/mnt/SDCARD/App/` (so it becomes `/mnt/SDCARD/App/pico`). Warning: If you use FTP and Filezilla, you must set your transfer type to binary or it will corrupt binaries on transfer.
 - Drag your RASPBERRY PI `pico8_dyn` and `pico8.dat` into `/mnt/SDCARD/App/pico/bin`. You can purchase Pico-8 [here](https://www.lexaloffle.com/pico-8.php).
 
 <a name="features"></a>
