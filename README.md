@@ -4,6 +4,16 @@
 
 A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 
+<a name=""></a>
+##
+
+<a name=""></a>
+##
+
+| Full screen | Aspect scaled | Integer scaled |
+|:-----------:|:-------------:|:--------------:|
+| ![Full screen](https://github.com/XK9274/pico-8-wrapper-miyoo/assets/47260768/32566649-9008-43e8-8cd5-9d2a587fe493) | ![Aspect scaled](https://github.com/XK9274/pico-8-wrapper-miyoo/assets/47260768/c3434d9e-0ed2-4716-8fc8-655c53390bd6) | ![Integer scaled](https://github.com/XK9274/pico-8-wrapper-miyoo/assets/47260768/b9679f53-7ff0-4a39-83ca-18aff5abd0b5) |
+
 ## Table of Contents
 1. [Installation](#installation)
 2. [Features](#features)
@@ -127,5 +137,8 @@ A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 
 ### Integer scaled
 ![Integer scaled](https://github.com/XK9274/pico-8-wrapper-miyoo/assets/47260768/b9679f53-7ff0-4a39-83ca-18aff5abd0b5)
+
+### App entry
+![MainUI_005](https://github.com/XK9274/pico-8-wrapper-miyoo/assets/47260768/2aed0514-7981-4f53-b932-bf1c898a6c8c)
 
 ---
