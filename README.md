@@ -117,7 +117,3 @@ A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 ![Integer scaled](https://github.com/XK9274/pico-8-wrapper-miyoo/assets/47260768/b9679f53-7ff0-4a39-83ca-18aff5abd0b5)
 
 ---
-
-This format should provide a clear and organized presentation of your project on GitHub. The Table of Contents provides quick navigation to different sections of your documentation.
-  
-
