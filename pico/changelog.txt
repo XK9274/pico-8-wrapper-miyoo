@@ -68,10 +68,8 @@ v0.8
 - always draw mouse icon when it's enabled
 - only draw alpha when required (for bezels, mouse icon)
 
-v0.8.1 
+- coming in next release v0.8.1 
 - added 2 new bezels from u/hippotgfc
-- exposed mouse shortcut into onioncfg.json
-
-TODO: 
-console investigation for input/recovery if you enter it (or an intercept to block entry)
-your suggestions
+- bezels added by @Pogeba and @LiquidDream in #5 and #3
+- add a config file fixer function to launch.sh (to fix black screen at launch)
+- modify the mouse hotkey to something other than L2 so 2 player games can be played
