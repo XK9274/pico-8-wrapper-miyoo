@@ -69,6 +69,7 @@ v0.8
 - only draw alpha when required (for bezels, mouse icon)
 
 v0.8.1
+- performance pass, FPS now more stable
 - added 2 new bezels from u/hippotgfc
 - bezels added by @Pogeba and @LiquidDream in #5 and #3
 - add a config file fixer function to launch.sh (to fix black screen at launch)
@@ -76,4 +77,3 @@ v0.8.1
 
 todo:
 - modify the mouse hotkey to something other than L2 so 2 player games can be played
-- performance investigation for heavier carts

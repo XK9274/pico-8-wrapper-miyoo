@@ -64,6 +64,13 @@ A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 <a name="changelog"></a>
 ## Changelog
 
+### v0.8.1
+- performance pass, FPS now more stable
+- added 2 new bezels from u/hippotgfc
+- bezels added by @Pogeba and @LiquidDream in #5 and #3
+- add a config file fixer function to launch.sh (to fix black screen at launch)
+- fix volume down key ghosting last input
+
 ### v0.8
 - Display mode shortcut added -> SELECT + R1 will toggle between scaled, fullscreen, native output (384x384 from pico-8) (which also has its own bezel selection).
 - Frame time adjustments.

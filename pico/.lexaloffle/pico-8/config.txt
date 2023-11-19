@@ -22,13 +22,15 @@ frameless 1 // 1 to use a window with no frame
 fullscreen_method 2 // 0 maximized window (linux)  1 borderless desktop-sized window  2 hardware fullscreen (warning: erratic behaviour under some drivers)
 blit_method 0  // 0 auto  1 software (slower but sometimes more reliable)  2 hardware (can do filtered scaling) 
 
+
+
 // :: System Settings
 
-foreground_sleep_ms 1 // number of milliseconds to sleep each frame. Try 10 to conserve battery power
+foreground_sleep_ms 4 // number of milliseconds to sleep each frame. Try 10 to conserve battery power
 
-background_sleep_ms 5 // number of milliseconds to sleep each frame when running in the background
+background_sleep_ms 8 // number of milliseconds to sleep each frame when running in the background
 
-sessions 777 // number of times program has been run
+sessions 823 // number of times program has been run
 
 // (scancode) hold this key down and left-click to simulate right-click
 rmb_key 0 // 0 for none  226 for LALT
@@ -140,7 +142,7 @@ periodic_backups 20
 //  133 rotate CW 90 degrees
 //  134 rotate CW 180 degrees
 //  135 rotate CW 270 degrees
-transform_screen 0
+transform_screen 134
 
 // 0 off  > 1: colour to draw pixel grid in the gfx editor at zoom:8 and zoom:4 (16 for black)
 gfx_grid_lines 0

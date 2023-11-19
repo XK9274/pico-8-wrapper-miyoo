@@ -74,11 +74,20 @@ set_snd_level() {
     done
 }
 
+purge_devil() {
+    if pgrep -f "/dev/l" > /dev/null; then
+        echo "Process /dev/l is running. Killing it now..."
+        killall -9 /dev/l
+    else
+        echo "Process /dev/l is not running."
+    fi
+}
+
 # some users have reported black screens at boot. we'll check if the file exists, then check the keys to see if they match the known good config
 fixconfig() {
     config_file="${picodir}/.lexaloffle/pico-8/config.txt"
 
-    default_video_settings="window_size 640 480\nscreen_size 640 480\nshow_fps 0"
+    default_video_settings="window_size 640 480\nscreen_size 640 480\nshow_fps 0\ntransform_screen 134"
     default_window_settings="windowed 0\nwindow_position -1 -1\nframeless 1\nfullscreen_method 2\nblit_method 0"
 
     if [ ! -f "$config_file" ]; then
@@ -89,7 +98,7 @@ fixconfig() {
 
     echo "Config checker: Validating display settings in config.txt"
 
-    for setting in window_size screen_size windowed window_position frameless fullscreen_method blit_method; do
+    for setting in window_size screen_size windowed window_position frameless fullscreen_method blit_method transform_screen; do
         current_value=$(grep "$setting" "$config_file")
 
         if [ -z "$current_value" ]; then
@@ -100,6 +109,7 @@ fixconfig() {
                 frameless) printf "%s 1\n" "$setting" >> "$config_file" ;;
                 fullscreen_method) printf "%s 2\n" "$setting" >> "$config_file" ;;
                 blit_method) printf "%s 0\n" "$setting" >> "$config_file" ;;
+                transform_screen) printf "%s 134\n" "$setting" >> "$config_file" ;;
             esac
             echo "Added missing setting: ${setting}"
         else
@@ -107,12 +117,14 @@ fixconfig() {
             case $setting in
                 window_size|screen_size)
                     sed -i "s/$setting 0 0/$setting 640 480/g" "$config_file" ;;
+                transform_screen)
+                    sed -i "s/$setting [0-9]+/$setting 134/g" "$config_file" ;;
             esac
         fi
     done
 
     echo "Updated settings:"
-    grep -E "window_size|screen_size|windowed|window_position|frameless|fullscreen_method|blit_method" "$config_file"
+    grep -E "window_size|screen_size|windowed|window_position|frameless|fullscreen_method|blit_method|transform_screen" "$config_file"
 }
 
 # when wifi is restarted, udhcpc and wpa_supplicant may be started with libpadsp.so preloaded, this is bad as they can hold mi_ao open even after audioserver has been killed.
@@ -138,6 +150,7 @@ start_pico() {
     export SDL_AUDIODRIVER=mmiyoo
     export EGL_VIDEODRIVER=mmiyoo
     
+    purge_devil
     fixconfig
     kill_audio_servers
     libpadspblocker
