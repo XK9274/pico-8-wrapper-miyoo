@@ -74,14 +74,15 @@ set_snd_level() {
     done
 }
 
-purge_devil() {
-    if pgrep -f "/dev/l" > /dev/null; then
-        echo "Process /dev/l is running. Killing it now..."
-        killall -2 l
-    else
-        echo "Process /dev/l is not running."
-    fi
-}
+#removed as it de-spawns mi_disp when killed
+# purge_devil() {
+    # if pgrep -f "/dev/l" > /dev/null; then
+        # echo "Process /dev/l is running. Killing it now..."
+        # killall -2 l
+    # else
+        # echo "Process /dev/l is not running."
+    # fi
+# }
 
 # some users have reported black screens at boot. we'll check if the file exists, then check the keys to see if they match the known good config
 fixconfig() {
@@ -154,7 +155,7 @@ start_pico() {
     export SDL_AUDIODRIVER=mmiyoo
     export EGL_VIDEODRIVER=mmiyoo
     
-    purge_devil
+    # purge_devil
     fixconfig
     kill_audio_servers
     libpadspblocker
