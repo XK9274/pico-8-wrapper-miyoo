@@ -11,6 +11,10 @@ get_curvol() {
     awk '/LineOut/ {if (!printed) {gsub(",", "", $8); print $8; printed=1}}' /proc/mi_modules/mi_ao/mi_ao0
 }
 
+get_curmute() {
+    awk '/LineOut/ {if (!printed) {gsub(",", "", $8); print $6; printed=1}}' /proc/mi_modules/mi_ao/mi_ao0
+}
+
 is_process_running() {
   process_name="$1"
   if [ -z "$(pgrep -f "$process_name")" ]; then
@@ -39,7 +43,9 @@ runifnecessary() {
 
 set_snd_level() {
     local target_vol="$1"
+    local target_mute="$2"
     local current_vol
+    local current_mute
     local start_time
     local elapsed_time
 
@@ -57,22 +63,26 @@ set_snd_level() {
     while true; do
         echo "set_ao_volume 0 ${target_vol}dB" > /proc/mi_modules/mi_ao/mi_ao0
         echo "set_ao_volume 1 ${target_vol}dB" > /proc/mi_modules/mi_ao/mi_ao0
-        current_vol=$(get_curvol)
+        echo "set_ao_mute ${target_mute}" > /proc/mi_modules/mi_ao/mi_ao0
 
-        if [ "$current_vol" = "$target_vol" ]; then
-            echo "Volume set to ${current_vol}dB"
+        current_vol=$(get_curvol)
+        current_mute=$(get_curmute)
+
+        if [ "$current_vol" = "$target_vol" ] && [ "$current_mute" = "$target_mute" ]; then
+            echo "Volume set to ${current_vol}dB, Mute status: ${current_mute}"
             return 0
         fi
 
         elapsed_time=$(( $(date +%s) - start_time ))
         if [ "$elapsed_time" -ge 360 ]; then
-            echo "Timed out trying to set volume"
+            echo "Timed out trying to set volume and mute status"
             return 1
         fi
 
         sleep 0.2
     done
 }
+
 
 #removed as it de-spawns mi_disp when killed
 # purge_devil() {
@@ -82,6 +92,11 @@ set_snd_level() {
     # else
         # echo "Process /dev/l is not running."
     # fi
+# }
+
+# summon_devil() {
+    # cat /proc/ls
+    # /dev/l &
 # }
 
 # some users have reported black screens at boot. we'll check if the file exists, then check the keys to see if they match the known good config
@@ -130,8 +145,6 @@ fixconfig() {
     grep -E "window_size|screen_size|windowed|window_position|frameless|fullscreen_method|blit_method|transform_screen" "$config_file"
 }
 
-
-
 # when wifi is restarted, udhcpc and wpa_supplicant may be started with libpadsp.so preloaded, this is bad as they can hold mi_ao open even after audioserver has been killed.
 libpadspblocker() { 
     wpa_pid=$(ps -e | grep "[w]pa_supplicant" | awk 'NR==1{print $1}')
@@ -159,13 +172,14 @@ start_pico() {
     fixconfig
     kill_audio_servers
     libpadspblocker
-    set_snd_level "${curvol}" &
+    set_snd_level "${curvol}" "${curmute}" &
     pico8_dyn -splore
 }
 
 main() {
     echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-    curvol=$(get_curvol) # grab current volume
+    curvol=$(get_curvol) 
+    curmute=$(get_curmute)
     mount --bind /mnt/SDCARD/Roms/PICO /mnt/SDCARD/App/pico/.lexaloffle/pico-8/carts
     start_pico
     umount /mnt/SDCARD/App/pico/.lexaloffle/pico-8/carts
