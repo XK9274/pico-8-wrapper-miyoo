@@ -4,6 +4,8 @@
 
 [CLICK HERE FOR DOWNLOADS](https://github.com/XK9274/pico-8-wrapper-miyoo/releases)
 
+[CLICK HERE FOR HELP WITH ALLIUM](https://github.com/XK9274/pico-8-wrapper-miyoo/issues/2)
+
 A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 
 <a name=""></a>
