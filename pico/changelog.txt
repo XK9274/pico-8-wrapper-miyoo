@@ -75,5 +75,10 @@ v0.8.1
 - add a config file fixer function to launch.sh (to fix black screen at launch)
 - fix volume down key ghosting last input
 
+v0.8.2 (requires swapping of most core files, do a full merge)
+- update config fix func
+- add mute check/restore logic same as volume
+- change mouse to Select + L2 instead of L2
+
 todo:
 - modify the mouse hotkey to something other than L2 so 2 player games can be played
