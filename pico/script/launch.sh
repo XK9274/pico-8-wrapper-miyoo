@@ -89,7 +89,6 @@ fixconfig() {
 
     if [ ! -f "$config_file" ]; then
         echo "Config file not found, creating with default values."
-        printf "// :: Video Settings\nwindow_size 640 480\nscreen_size 640 480\nshow_fps 0\ntransform_screen 134\n\n// :: Window Settings\nwindowed 0\nwindow_position -1 -1\nframeless 1\nfullscreen_method 2\nblit_method 0\n" > "$config_file"
         return
     fi
 
