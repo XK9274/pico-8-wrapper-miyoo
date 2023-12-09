@@ -116,7 +116,7 @@ fixconfig() {
     set_windowed="windowed 0"
     set_window_position="window_position -1 -1"
     set_frameless="frameless 1"
-    set_fullscreen_method="fullscreen_method 2"
+    set_fullscreen_method="fullscreen_method 0"
     set_blit_method="blit_method 2"
     set_transform_screen="transform_screen 134"
 
@@ -173,7 +173,7 @@ start_pico() {
     kill_audio_servers
     libpadspblocker
     set_snd_level "${curvol}" "${curmute}" &
-    pico8_dyn -splore
+    pico8_dyn -splore -preblit_scale 3 -pixel_perfect 0
 }
 
 main() {
@@ -187,3 +187,4 @@ main() {
 }
 
 main
+
