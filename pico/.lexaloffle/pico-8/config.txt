@@ -19,14 +19,12 @@ show_fps 0 // Draw frames per second in the corner
 windowed 0 // 1 to start up in windowed mode
 window_position -1 -1 // x and y position of window (-1, -1 to let the window manager decide)
 frameless 1 // 1 to use a window with no frame
-fullscreen_method 0 // 0 maximized window (linux)  1 borderless desktop-sized window  2 hardware fullscreen (warning: erratic behaviour under some drivers)
-blit_method 2  // 0 auto  1 software (slower but sometimes more reliable)  2 hardware (can do filtered scaling) 
-
-
+fullscreen_method 2 // 0 maximized window (linux)  1 borderless desktop-sized window  2 hardware fullscreen (warning: erratic behaviour under some drivers)
+blit_method 0  // 0 auto  1 software (slower but sometimes more reliable)  2 hardware (can do filtered scaling) 
 
 // :: System Settings
 
-foreground_sleep_ms 5 // number of milliseconds to sleep each frame. Try 10 to conserve battery power
+foreground_sleep_ms 2 // number of milliseconds to sleep each frame. Try 10 to conserve battery power
 
 background_sleep_ms 10 // number of milliseconds to sleep each frame when running in the background
 
@@ -102,7 +100,7 @@ gif_len 8
 gif_reset_mode 0
 
 // 0 for off. 1 for auto. 2 to allow control of a cart's framerate due to host machine's cpu capacity
-host_framerate_control 1
+host_framerate_control 0
 
 // filter splore cartridges
 // 0 off   1 on (exclude cartridge tagged as 'mature' by community)
