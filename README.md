@@ -147,9 +147,9 @@ A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 
 ## Building SDL2 Libs
 <a name="building"></a>
-- `git clone https://github.com/XK9274/pico-8-wrapper-miyoo`
-- `cd pico-8-wrapper-miyoo`
-- `make picosdl2`
+`git clone https://github.com/XK9274/pico-8-wrapper-miyoo`
+`cd pico-8-wrapper-miyoo`
+`make picosdl2`
 
 <a name="screenshots"></a>
 ## Screenshots
