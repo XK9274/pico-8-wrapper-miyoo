@@ -4,22 +4,29 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
-TMP_DIR="/tmp/sdl2_miyoo"
+TMP_DIR="/tmp"
 WORKSPACE_DIR="/root/workspace"
-REPO_URL="https://github.com/XK9274/sdl2_miyoo"
-BRANCH="pico8"
+SDL2_DIR="$WORKSPACE_DIR/sdl2_miyoo"
+REPO_URL_SDL="https://github.com/XK9274/sdl2_miyoo"
+REPO_URL_NEON="https://github.com/XK9274/neon-arm-library-miyoo.git"
+BRANCH_SDL="pico8"
 TOOLCHAIN_URL="https://github.com/steward-fu/archives/releases/download/miyoo-mini/toolchain.tar.gz"
-LIB_SOURCE_PATH="$WORKSPACE_DIR/sdl2_miyoo/build/.libs/libSDL2-2.0.so.0.18.2"
+LIB_SOURCE_PATH_SDL="$WORKSPACE_DIR/sdl2_miyoo/build/.libs/libSDL2-2.0.so.0.18.2"
 LIB_DEST_DIR="$WORKSPACE_DIR/build/lib"
-LIB_DEST_PATH="$LIB_DEST_DIR/libSDL2-2.0.so.0"
 
 mkdir -p "$WORKSPACE_DIR"
 mkdir -p "$LIB_DEST_DIR"
 
-if [ ! -d "$TMP_DIR" ]; then
+if [ ! -d "$TMP_DIR/sdl2_miyoo" ]; then
     echo "Cloning sdl2_miyoo repository..."
-    git clone --depth=1 "$REPO_URL" -b "$BRANCH" "$TMP_DIR"
-    cp -r "$TMP_DIR" "$WORKSPACE_DIR/sdl2_miyoo"
+    git clone --depth=1 "$REPO_URL_SDL" -b "$BRANCH_SDL" "$TMP_DIR/sdl2_miyoo"
+    cp -r "$TMP_DIR/sdl2_miyoo" "$WORKSPACE_DIR/"
+fi
+
+if [ ! -d "$TMP_DIR/neon-arm-library-miyoo" ]; then
+    echo "Cloning neon-arm-library-miyoo repository..."
+    git clone "$REPO_URL_NEON" "$TMP_DIR/neon-arm-library-miyoo"
+    cp -r "$TMP_DIR/neon-arm-library-miyoo" "$WORKSPACE_DIR/"
 fi
 
 printf "${GREEN}=====================================\n"
@@ -45,24 +52,37 @@ done
 
 export PATH="/opt/mmiyoo/bin/:$PATH"
 
-printf "${YELLOW}Configuring environment...${NC}\n"
-if [ -d "$WORKSPACE_DIR/sdl2_miyoo/" ] && [ -f "$WORKSPACE_DIR/sdl2_miyoo/run.sh" ]; then
-    cd "$WORKSPACE_DIR/sdl2_miyoo"
-    chmod -R a+w+x *
+cd "$WORKSPACE_DIR/neon-arm-library-miyoo"
+export CROSS_COMPILE="arm-linux-gnueabihf-"
+make
+NEON_LIB_OUTPUT="$WORKSPACE_DIR/neon-arm-library-miyoo/lib"
+if [ -d "$NEON_LIB_OUTPUT" ]; then
+    cp -r "$NEON_LIB_OUTPUT"/* "$LIB_DEST_DIR"
+    cp -r "$NEON_LIB_OUTPUT"/* "$SDL2_DIR"
+    printf "${GREEN}NEON ARM library built and copied to: ${NC}$LIB_DEST_DIR\n"
+else
+    printf "${RED}Failed to build or locate NEON ARM library output.${NC}\n"
+fi
+unset CROSS_COMPILE
+
+cd "$WORKSPACE_DIR/sdl2_miyoo"
+if [ -f "./run.sh" ]; then
+    chmod +x ./run.sh
     ./run.sh config
+    make -j$(( $(nproc) - 2 ))
+    if [ -f "$LIB_SOURCE_PATH_SDL" ]; then
+        cp "$LIB_SOURCE_PATH_SDL" "$LIB_DEST_DIR/libSDL2-2.0.so.0"
+        printf "${GREEN}SDL2 library built and copied to: ${NC}$LIB_DEST_DIR\n"
+    else
+        printf "${RED}Failed to build SDL2 library.${NC}\n"
+    fi
 else
-    printf "${RED}run.sh script not found.${NC}\n"
+    printf "${RED}SDL2 run.sh script not found.${NC}\n"
 fi
 
-make -j$(( $(nproc) - 2 ))
+printf "${GREEN}=====================================\n"
+printf "Setup Summary\n"
+printf "=====================================${NC}\n"
+printf "${GREEN}NEON ARM and SDL2 libraries should now be in: ${NC}$LIB_DEST_DIR\n"
 
-if [ -f "$LIB_SOURCE_PATH" ]; then
-    cp "$LIB_SOURCE_PATH" "$LIB_DEST_PATH"
-    printf "${GREEN}The library has been created and is located at: ${NC}$LIB_DEST_PATH\n"
-    printf "${GREEN}You can now make changes to the source and recompile with:${NC} make -j$(( $(nproc) - 2 ))\n"
-    printf "${GREEN}To reconfigure, run:${NC} /root/workspace/sdl2_miyoo/run.sh config\n"
-else
-    printf "${RED}The library file was not found. Ensure the build process completed successfully.${NC}\n"
-fi
-
-exec "$@"
+exec /bin/bash
