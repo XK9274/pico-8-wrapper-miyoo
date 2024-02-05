@@ -51,6 +51,7 @@ fi
 printf "${GREEN}=====================================\n"
 printf "Toolchain Setup for Miyoo Mini\n"
 printf "This build environment relies on Stewards toolchain.\n"
+printf "The first run will download around 700mb of data.\n"
 printf "=====================================${NC}\n\n"
 
 if [ ! -f "$WORKSPACE_DIR/toolchain.tar.gz" ]; then
