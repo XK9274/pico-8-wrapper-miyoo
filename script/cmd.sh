@@ -12,6 +12,7 @@ REPO_URL_NEON="https://github.com/XK9274/neon-arm-library-miyoo.git"
 BRANCH_SDL="pico8"
 TOOLCHAIN_URL="https://github.com/steward-fu/archives/releases/download/miyoo-mini/toolchain.tar.gz"
 LIB_SOURCE_PATH_SDL="$WORKSPACE_DIR/sdl2_miyoo/build/.libs/libSDL2-2.0.so.0.18.2"
+INC_DEST_DIR="$WORKSPACE_DIR/build/"
 LIB_DEST_DIR="$WORKSPACE_DIR/build/lib"
 
 mkdir -p "$WORKSPACE_DIR"
@@ -56,16 +57,19 @@ cd "$WORKSPACE_DIR/neon-arm-library-miyoo"
 export CROSS_COMPILE="arm-linux-gnueabihf-"
 make
 NEON_LIB_OUTPUT="$WORKSPACE_DIR/neon-arm-library-miyoo/lib"
+NEON_INCLUDE_DIR="$WORKSPACE_DIR/neon-arm-library-miyoo/include"
 if [ -d "$NEON_LIB_OUTPUT" ]; then
     cp -r "$NEON_LIB_OUTPUT"/* "$LIB_DEST_DIR"
     cp -r "$NEON_LIB_OUTPUT"/* "$SDL2_DIR"
     printf "${GREEN}NEON ARM library built and copied to: ${NC}$LIB_DEST_DIR\n"
+    cp -r "$NEON_INCLUDE_DIR" "$INC_DEST_DIR/"
+    printf "${GREEN}NEON ARM include directory copied to: ${NC}$INC_DEST_DIR\n"
 else
     printf "${RED}Failed to build or locate NEON ARM library output.${NC}\n"
 fi
 unset CROSS_COMPILE
 
-cd "$WORKSPACE_DIR/sdl2_miyoo"
+cd "$SDL2_DIR"
 if [ -f "./run.sh" ]; then
     chmod +x ./run.sh
     ./run.sh config
@@ -83,6 +87,6 @@ fi
 printf "${GREEN}=====================================\n"
 printf "Setup Summary\n"
 printf "=====================================${NC}\n"
-printf "${GREEN}NEON ARM and SDL2 libraries should now be in: ${NC}$LIB_DEST_DIR\n"
+printf "${GREEN}NEON ARM and SDL2 libraries, including NEON includes, should now be in: ${NC}$LIB_DEST_DIR\n"
 
 exec /bin/bash
