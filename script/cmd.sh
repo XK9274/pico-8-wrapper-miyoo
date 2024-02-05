@@ -13,7 +13,7 @@ TOOLCHAIN_URL="https://github.com/steward-fu/archives/releases/download/miyoo-mi
 LIB_SOURCE_PATH_SDL="$WORKSPACE_DIR/sdl2_miyoo/build/.libs/libSDL2-2.0.so.0.18.2"
 INC_DEST_DIR="$WORKSPACE_DIR/build/"
 LIB_DEST_DIR="$WORKSPACE_DIR/build/lib"
-PICO_APP_DIR="/root/workspace/dist/pico"
+PICO_APP_DIR="/root/workspace/dist/"
 
 mkdir -p "$WORKSPACE_DIR"
 mkdir -p "$LIB_DEST_DIR"
@@ -24,15 +24,17 @@ copy_lib() {
     filename=$(basename "$dest")
     if [ -f "$src" ]; then
         cp "$src" "$dest"
-        printf "${GREEN}Copied $filename to $PICO_APP_DIR/lib/${NC}\n"
+        printf "${GREEN}Copied $filename to $PICO_APP_DIR/pico/lib/${NC}\n"
     else
         printf "${RED}Failed to find $filename. Copy failed.${NC}\n"
     fi
 }
 
-cp -a /root/workspace/pico "$PICO_APP_DIR"
-rm -rf "$PICO_APP_DIR/lib"
-mkdir -p "$PICO_APP_DIR/lib"
+
+mkdir -p "$PICO_APP_DIR/pico/"
+cp -a /root/workspace/pico "$PICO_APP_DIR/"
+rm -rf "$PICO_APP_DIR/pico/lib"
+mkdir -p "$PICO_APP_DIR/pico/lib"
 
 if [ ! -d "$TMP_DIR/sdl2_miyoo" ]; then
     echo "Cloning sdl2_miyoo repository..."
@@ -105,19 +107,19 @@ apt-get update -y
 apt-get install -y libunistring-dev:armhf
 
 # am i lazy
-copy_lib "/root/workspace/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libSDL2_ttf-2.0.so.0.14.1" "$PICO_APP_DIR/lib/libSDL2_ttf-2.0.so.0"
-copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libcrypto.so.1.1" "$PICO_APP_DIR/lib/libcrypto.so.1.1"
-copy_lib "/root/workspace/sdl2_miyoo/libEGL.so" "$PICO_APP_DIR/lib/libEGL.so"
-copy_lib "/root/workspace/sdl2_miyoo/libGLESv2.so" "$PICO_APP_DIR/lib/libGLESv2.so"
-copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libexpat.so.1.8.1" "$PICO_APP_DIR/lib/libexpat.so.1"
-cp "$PICO_APP_DIR/lib/libexpat.so.1" "$PICO_APP_DIR/lib/libexpat.so"
-copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libjson-c.so.5.1.0" "$PICO_APP_DIR/lib/libjson-c.so.5"
-copy_lib "$NEON_LIB_OUTPUT/libneonarmmiyoo.so" "$PICO_APP_DIR/lib/libneonarmmiyoo.so"
-copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libSDL2_image-2.0.so.0.2.3" "$PICO_APP_DIR/lib/libSDL2_image-2.0.so.0"
-copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libSDL2_ttf-2.0.so.0.14.1" "$PICO_APP_DIR/lib/libSDL2_ttf-2.0.so.0"
-copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libz.so.1.2.11" "$PICO_APP_DIR/lib/libz.so.1"
-copy_lib "/usr/lib/arm-linux-gnueabihf/libunistring.so.2.1.0" "$PICO_APP_DIR/lib/libunistring.so.2"
-copy_lib "/root/workspace/build/lib/libSDL2-2.0.so.0" "$PICO_APP_DIR/lib/"
+copy_lib "/root/workspace/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libSDL2_ttf-2.0.so.0.14.1" "$PICO_APP_DIR/pico/lib/libSDL2_ttf-2.0.so.0"
+copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libcrypto.so.1.1" "$PICO_APP_DIR/pico/lib/libcrypto.so.1.1"
+copy_lib "/root/workspace/sdl2_miyoo/libEGL.so" "$PICO_APP_DIR/pico/lib/libEGL.so"
+copy_lib "/root/workspace/sdl2_miyoo/libGLESv2.so" "$PICO_APP_DIR/pico/lib/libGLESv2.so"
+copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libexpat.so.1.8.1" "$PICO_APP_DIR/pico/lib/libexpat.so.1"
+cp "$PICO_APP_DIR/pico/lib/libexpat.so.1" "$PICO_APP_DIR/pico/lib/libexpat.so"
+copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libjson-c.so.5.1.0" "$PICO_APP_DIR/pico/lib/libjson-c.so.5"
+copy_lib "$NEON_LIB_OUTPUT/libneonarmmiyoo.so" "$PICO_APP_DIR/pico/lib/libneonarmmiyoo.so"
+copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libSDL2_image-2.0.so.0.2.3" "$PICO_APP_DIR/pico/lib/libSDL2_image-2.0.so.0"
+copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libSDL2_ttf-2.0.so.0.14.1" "$PICO_APP_DIR/pico/lib/libSDL2_ttf-2.0.so.0"
+copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libz.so.1.2.11" "$PICO_APP_DIR/pico/lib/libz.so.1"
+copy_lib "/usr/lib/arm-linux-gnueabihf/libunistring.so.2.1.0" "$PICO_APP_DIR/pico/lib/libunistring.so.2"
+copy_lib "/root/workspace/build/lib/libSDL2-2.0.so.0" "$PICO_APP_DIR/pico/lib/"
 
 printf "${GREEN}=====================================\n"
 printf "PICO Library Setup Complete\n"

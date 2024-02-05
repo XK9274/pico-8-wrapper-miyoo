@@ -101,7 +101,7 @@ fixconfig() {
     set_frameless="frameless 1"
     set_fullscreen_method="fullscreen_method 2"
     set_blit_method="blit_method 0"
-    # set_transform_screen="transform_screen 134"
+    set_transform_screen="transform_screen 0"
 
     for setting in window_size screen_size windowed window_position frameless fullscreen_method blit_method transform_screen; do
         case $setting in
@@ -112,7 +112,7 @@ fixconfig() {
             frameless) new_value="$set_frameless" ;;
             fullscreen_method) new_value="$set_fullscreen_method" ;;
             blit_method) new_value="$set_blit_method" ;;
-            # transform_screen) new_value="$set_transform_screen" ;;
+            transform_screen) new_value="$set_transform_screen" ;;
         esac
 
         if grep -q "^$setting" "$config_file"; then
@@ -125,7 +125,7 @@ fixconfig() {
     done
 
     echo "Updated settings:"
-    grep -E "window_size|screen_size|windowed|window_position|frameless|fullscreen_method|blit_method" "$config_file"
+    grep -E "window_size|screen_size|windowed|window_position|frameless|fullscreen_method|blit_method|transform_screen" "$config_file"
 }
 
 # when wifi is restarted, udhcpc and wpa_supplicant may be started with libpadsp.so preloaded, this is bad as they can hold mi_ao open even after audioserver has been killed.
