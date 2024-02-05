@@ -153,8 +153,8 @@ A wrapper to run Pico-8 natively on the Miyoo Mini/Miyoo Mini Plus.
 
 `make picosdl2`
 
-If you have parasyte on your dist, you can comment out (in cmd.sh) `copy_lib "/root/workspace/sdl2_miyoo/libGLESv2.so" "$PICO_APP_DIR/pico/lib/libGLESv2.so"` to use a smaller lib & also make the dist smaller
-Make sure your LD_LIBRARY_PATH in `pico/script/launch.sh` reflects the location of this library
+- If you have parasyte on your dist, you can comment out (in cmd.sh) `copy_lib "/root/workspace/sdl2_miyoo/libGLESv2.so" "$PICO_APP_DIR/pico/lib/libGLESv2.so"` to use a smaller lib & also make the dist smaller
+- Make sure your LD_LIBRARY_PATH in `pico/script/launch.sh` reflects the location of this library
 
 <a name="screenshots"></a>
 ## Screenshots
