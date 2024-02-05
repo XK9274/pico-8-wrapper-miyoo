@@ -1,5 +1,4 @@
 #!/bin/bash
-
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -14,9 +13,26 @@ TOOLCHAIN_URL="https://github.com/steward-fu/archives/releases/download/miyoo-mi
 LIB_SOURCE_PATH_SDL="$WORKSPACE_DIR/sdl2_miyoo/build/.libs/libSDL2-2.0.so.0.18.2"
 INC_DEST_DIR="$WORKSPACE_DIR/build/"
 LIB_DEST_DIR="$WORKSPACE_DIR/build/lib"
+PICO_APP_DIR="/root/workspace/dist/pico"
 
 mkdir -p "$WORKSPACE_DIR"
 mkdir -p "$LIB_DEST_DIR"
+
+copy_lib() {
+    src=$1
+    dest=$2
+    filename=$(basename "$dest")
+    if [ -f "$src" ]; then
+        cp "$src" "$dest"
+        printf "${GREEN}Copied $filename to $PICO_APP_DIR/lib/${NC}\n"
+    else
+        printf "${RED}Failed to find $filename. Copy failed.${NC}\n"
+    fi
+}
+
+cp -a /root/workspace/pico "$PICO_APP_DIR"
+rm -rf "$PICO_APP_DIR/lib"
+mkdir -p "$PICO_APP_DIR/lib"
 
 if [ ! -d "$TMP_DIR/sdl2_miyoo" ]; then
     echo "Cloning sdl2_miyoo repository..."
@@ -84,9 +100,38 @@ else
     printf "${RED}SDL2 run.sh script not found.${NC}\n"
 fi
 
+dpkg --add-architecture armhf
+apt-get update -y
+apt-get install -y libunistring-dev:armhf
+
+# am i lazy
+copy_lib "/root/workspace/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libSDL2_ttf-2.0.so.0.14.1" "$PICO_APP_DIR/lib/libSDL2_ttf-2.0.so.0"
+copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libcrypto.so.1.1" "$PICO_APP_DIR/lib/libcrypto.so.1.1"
+copy_lib "/root/workspace/sdl2_miyoo/libEGL.so" "$PICO_APP_DIR/lib/libEGL.so"
+copy_lib "/root/workspace/sdl2_miyoo/libGLESv2.so" "$PICO_APP_DIR/lib/libGLESv2.so"
+copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libexpat.so.1.8.1" "$PICO_APP_DIR/lib/libexpat.so.1"
+cp "$PICO_APP_DIR/lib/libexpat.so.1" "$PICO_APP_DIR/lib/libexpat.so"
+copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libjson-c.so.5.1.0" "$PICO_APP_DIR/lib/libjson-c.so.5"
+copy_lib "$NEON_LIB_OUTPUT/libneonarmmiyoo.so" "$PICO_APP_DIR/lib/libneonarmmiyoo.so"
+copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libSDL2_image-2.0.so.0.2.3" "$PICO_APP_DIR/lib/libSDL2_image-2.0.so.0"
+copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libSDL2_ttf-2.0.so.0.14.1" "$PICO_APP_DIR/lib/libSDL2_ttf-2.0.so.0"
+copy_lib "/opt/mmiyoo/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libz.so.1.2.11" "$PICO_APP_DIR/lib/libz.so.1"
+copy_lib "/usr/lib/arm-linux-gnueabihf/libunistring.so.2.1.0" "$PICO_APP_DIR/lib/libunistring.so.2"
+copy_lib "/root/workspace/build/lib/libSDL2-2.0.so.0" "$PICO_APP_DIR/lib/"
+
 printf "${GREEN}=====================================\n"
-printf "Setup Summary\n"
+printf "PICO Library Setup Complete\n"
 printf "=====================================${NC}\n"
-printf "${GREEN}NEON ARM and SDL2 libraries, including NEON includes, should now be in: ${NC}$LIB_DEST_DIR\n"
+printf "${GREEN}All necessary libraries should now be in: ${NC}$PICO_APP_DIR/lib\n"
+
+printf "${GREEN}=====================================\n"
+printf "Distribution Setup Complete\n"
+printf "=====================================${NC}\n"
+printf "${GREEN}The distribution folder is ready at: ${NC}$PICO_APP_DIR\n"
+printf "${YELLOW}To run the app, please follow the steps below:\n"
+printf "${YELLOW}1. Add your binaries (pico8_dyn and pico8.dat) to the following directory:\n"
+printf "${NC}$PICO_APP_DIR/bin\n"
+printf "${YELLOW}2. Copy the entire ${NC}$PICO_APP_DIR ${YELLOW}directory to the '/mnt/SDCARD/App' directory on your device.${NC}\n"
+printf "${YELLOW}3. Restart the Miyoo device, or restart just MainUI to refresh the App list${NC}\n"
 
 exec /bin/bash

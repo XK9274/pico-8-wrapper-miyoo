@@ -140,7 +140,7 @@ periodic_backups 20
 //  133 rotate CW 90 degrees
 //  134 rotate CW 180 degrees
 //  135 rotate CW 270 degrees
-transform_screen 134
+transform_screen 0
 
 // 0 off  > 1: colour to draw pixel grid in the gfx editor at zoom:8 and zoom:4 (16 for black)
 gfx_grid_lines 0
